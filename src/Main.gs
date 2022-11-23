@@ -80,3 +80,16 @@ function doGet(e) {
   var json = JSON.stringify(result, null, 2);
   return ContentService.createTextOutput(json.toString()).setMimeType(ContentService.MimeType.JSON);
 }
+
+
+
+
+
+//+---------------------
+//+ U T I L I T I E S
+//+---------------------
+// Helper functions.
+//
+function variablify(name) {
+  return name = name.replace(/\W/ig, '').replace(/\s/ig, '');
+}
