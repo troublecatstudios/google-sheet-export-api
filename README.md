@@ -1,6 +1,63 @@
 # google-sheet-export-api
 A Google AppScript project that allows a google sheet to be downloaded as JSON via a HTTP request.
 
+## Using the API
+
+### ?action=ping
+
+Returns the version of the spreadsheet api script. Useful if future versions make changes to the `export` action data structure.
+
+#### Example Response
+```json
+{
+  "script_version": 2
+}
+```
+
+### ?action=export
+
+Exports all the data within the Google Sheet specified in the `documentId` script property (see [Installation](#installation)). The data structure of the response is based entirely off the google sheet contents and the script supports multiple sheets so the export can take some time to complete depending on the size of your data set.
+
+
+#### Example Response
+This response assumes the google spreadsheet contains two sheets "Sheet One" and "Sheet Two", each with three columns: "Column One", "Column Two" and "Column Three". Note that the column names are adjusted so that they are accessible via dot notation.
+
+```json
+{
+  "sheets": {
+    "SheetOne": {
+      "fields": [
+        "ColumnOne",
+        "ColumnTwo",
+        "ColumnThree"
+      ],
+      "data": [{
+        "ColumnOne": "Test",
+        "ColumnTwo": "Test",
+        "ColumnThree": "Test"
+      }]
+    },
+    "SheetTwo": {
+      "fields": [
+        "ColumnOne",
+        "ColumnTwo",
+        "ColumnThree"
+      ],
+      "data": [{
+        "ColumnOne": "Test",
+        "ColumnTwo": "Test",
+        "ColumnThree": "Test"
+      },
+      {
+        "ColumnOne": "Test",
+        "ColumnTwo": "Test",
+        "ColumnThree": "Test"
+      }]
+    }
+  }
+}
+```
+
 ## Installation
 
 | | |
